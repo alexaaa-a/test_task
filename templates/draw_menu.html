@@ -1,0 +1,17 @@
+<ul class="menu">
+    {% for node in menu_tree %}
+        <li class="{% if node.is_active %}active{% endif %}">
+            <a href="{{ node.item.resolve_url }}">
+                {{ node.item.name }}
+            </a>
+
+            {% if node.is_active or node.is_expanded %}
+                {% if node.children %}
+                    <ul class="submenu">
+                        {% include "draw_menu.html" with menu_tree=node.children %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
